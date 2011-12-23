@@ -1,23 +1,21 @@
 bigComp = 600851475143
 
-# start from 1/2 of the way. crudest optimization. <3 fast computers.
-currentTest = (600851475143/2).floor
-
-largestPrime = nil
-
-def prime?(n)
-    foundDivider = false
-    for d in 2..(Math.sqrt(n))
-        foundDivider = ((n % d) == 0) or foundDivider
+def primeFactors(n)
+    primeFactors = {}
+    for d in 2...(Math.sqrt(n))
+        if divides(d,n)
+            primeFactors[d] = true
+            
+            primeFactors[n/d] = true
     end
     return foundDivider ? false : true
 end
 
-# quick and dirty
-until currentTest <= 1
-    if (Float(bigComp / currentTest) % 1) == 0 && prime?(currentTest)
-        puts currentTest
-        exit
-    end
+def divides?(a,b)
+    return Float(a/b)%1 == 0
 end
 
+
+
+puts(divides(3,7))
+puts(divides(3,6))
