@@ -53,5 +53,5 @@ end
 
 
 def divides?(a,b)
-    return (Float(b)/a)%1 == 0
+    return b%a == 0
 end
