@@ -62,14 +62,16 @@ end
 # sieve of aristosthenes (or however that's pronounced, the Greek guy)
 def primesUnder(cap)
 
-    # start out optimistic: all numbers are prime
-    isPrime = {}
-    for i in 2..cap do
-        isPrime[i] = true
+    # start out optimistic: all odds are prime
+    isPrime = {2 => true}
+    for i in 3..cap
+        if i%2 != 0 then
+            isPrime[i] = true
+        end
     end
 
     # now come back to realistic expectations: mark off all multiples.
-    for n in 2..cap do
+    for n in 3..cap do
         # make sure we haven't come across this as a composite # yet.
         # if we have, ignore.
         if isPrime[n] then 
@@ -89,6 +91,6 @@ def primesUnder(cap)
 end
 
 
-#puts primesUnder(1000)
+puts primesUnder(100)
 
 # TODO: file IO.
