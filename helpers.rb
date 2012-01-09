@@ -75,23 +75,20 @@ def primesUnder(cap)
         if isPrime[n] then 
             for aboveN in (n+1)..cap do
                 if isPrime[aboveN] && divides?(n, aboveN) then
-                    isPrime[aboveN] = false
+                    # remove it so that isPrime becomes the list of primes we want,
+                    # and we reduce what we have to check as we go.
+                    isPrime.delete(aboveN)
                 end
             end
         end
     end
 
-    primes = []
-    isPrime.keys.each do |n|
-        if isPrime[n] then
-            primes.push(n) 
-        end
-    end
-
-    return primes
+    # we've removed any non-prime #s from the isPrime hash,
+    # so they keys are exactly the list of primes
+    return isPrime.keys
 end
 
 
-puts primesUnder(100)
+#puts primesUnder(1000)
 
 # TODO: file IO.
