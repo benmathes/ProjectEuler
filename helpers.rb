@@ -51,7 +51,47 @@ def primeFactors(n, verbose = false, checked = {})
     return pFactors
 end
 
-
+#reads better this way, to my math-y mind.
 def divides?(a,b)
     return b%a == 0
 end
+
+
+
+# to generate the first (large) primes
+# sieve of aristosthenes (or however that's pronounced, the Greek guy)
+def primesUnder(cap)
+
+    # start out optimistic: all numbers are prime
+    isPrime = {}
+    for i in 2..cap do
+        isPrime[i] = true
+    end
+
+    # now come back to realistic expectations: mark off all multiples.
+    for n in 2..cap do
+        # make sure we haven't come across this as a composite # yet.
+        # if we have, ignore.
+        if isPrime[n] then 
+            for aboveN in (n+1)..cap do
+                if isPrime[aboveN] && divides?(n, aboveN) then
+                    isPrime[aboveN] = false
+                end
+            end
+        end
+    end
+
+    primes = []
+    isPrime.keys.each do |n|
+        if isPrime[n] then
+            primes.push(n) 
+        end
+    end
+
+    return primes
+end
+
+
+puts primesUnder(100)
+
+# TODO: file IO.
