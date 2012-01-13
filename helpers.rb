@@ -91,6 +91,9 @@ def primesUnder(cap)
 end
 
 
-puts primesUnder(100)
+# raw execution
+if __FILE__ == $0
+    puts primesUnder(100000).join(',')
+end
 
-# TODO: file IO.
+
